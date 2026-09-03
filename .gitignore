@@ -1,0 +1,24 @@
+# Matlab
+*.asv
+*.m~
+*.mex*
+slprj/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Data
+*.mat
+!sample_*.mat
