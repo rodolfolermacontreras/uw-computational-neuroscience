@@ -104,13 +104,38 @@ uw-computational-neuroscience/
 ├── week-6-computing-with-networks/
 ├── week-7-networks-that-learn-plasticity/
 ├── week-8-learning-from-supervision-rewards/
-├── assignments/          # graded quizzes and programming assignments
+├── assignments/          # programming assignments and supporting files
+├── quizzes/              # quiz questions, answers, and explanations
 └── notes/                # cross-week notes, derivations, summaries
 ```
 
 ---
 
+## Study Materials
+
+- [MATLAB programming quiz](quizzes/matlab_programming_quiz.md): all 14 questions shared as screenshots, a quick answer key, and explanations of correct and incorrect options.
+- [Python Information and Tutorials](notes/python_information_and_tutorials.md): practical Python 3 summary, NumPy and Matplotlib examples, MATLAB syntax differences, and safe pickle handling.
+
+### Study Log
+
+| Date | Material | Recorded work |
+|---|---|---|
+| 2026-09-13 | MATLAB programming preparation | Documented 14 quiz questions with answers and explanations. Submission and score are not confirmed. |
+| 2026-09-13 | Python Information and Tutorials | Documented the shared reading as practical notes with Python 3 corrections and examples. No optional Python quiz questions have been shared. |
+
+These records establish what was shared and documented, not independent mastery or completion of a neuroscience module. Topic checkboxes remain unchanged until demonstrated.
+
+### Working Agreement
+
+- **Clean as we go:** Keep course files organized and remove temporary artifacts from the current task without discarding unrelated work.
+- **Document as we go:** Save shared quizzes with answers and explanations in `quizzes/`, keep reference material in `notes/`, and update this study log.
+- **Commit as we go:** Validate and commit coherent batches of UW work in this standalone repository. When pushing, verify that the working tree is clean and `main` matches `origin/main`. Do not include unrelated parent-repository changes.
+
+---
+
 ## Progress
+
+The week statuses below are retained from the initial tracker and still need confirmation. The study log above records the material covered in this workspace so far.
 
 | Week | Topic | Instructor | Status |
 |---|---|---|---|
