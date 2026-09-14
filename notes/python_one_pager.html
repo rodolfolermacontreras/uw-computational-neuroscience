@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A practical Python 3 reference for UW Computational Neuroscience: NumPy arrays, MATLAB translations, plotting, and trusted pickle data.">
+  <title>Python Field Notes | UW Computational Neuroscience</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #22292b;
+      --muted: #536061;
+      --green: #006858;
+      --red: #a43740;
+      --line: #d8dfe0;
+      --paper: #ffffff;
+      --wash: #f2f6f5;
+      --warning: #fff6d8;
+      --code: "Cascadia Code", Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #eaf0ee;
+      background-image: linear-gradient(90deg, #ffffff50 1px, transparent 1px);
+      background-size: 32px 32px;
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      letter-spacing: 0;
+    }
+    main {
+      max-width: 1060px;
+      margin: 28px auto;
+      padding: 30px 38px 22px;
+      background: var(--paper);
+      border-top: 5px solid var(--green);
+    }
+    header { padding-bottom: 19px; border-bottom: 2px solid var(--ink); }
+    .masthead, .title-row, footer { display: flex; justify-content: space-between; gap: 16px; }
+    .masthead { color: var(--green); font-size: 11px; font-weight: 700; }
+    .edition { color: var(--muted); white-space: nowrap; }
+    .title-row { align-items: baseline; margin-top: 12px; }
+    h1 {
+      margin: 0;
+      font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      font-size: 37px;
+      line-height: 1.15;
+      font-weight: 700;
+    }
+    h1 span { font-weight: 400; color: var(--green); }
+    .runtime { font-family: var(--code); font-size: 11px; color: var(--muted); }
+    .intro { margin: 10px 0 0; max-width: 78ch; }
+    .setup { margin: 6px 0 0; color: var(--muted); font-size: 12px; }
+    .reference-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 30px; }
+    section { min-width: 0; padding: 17px 0 15px; border-bottom: 1px solid var(--line); }
+    h2 { display: flex; align-items: baseline; gap: 9px; margin: 0 0 9px; font-size: 17px; line-height: 1.3; }
+    .number { color: var(--green); font-family: var(--code); font-size: 11px; font-weight: 400; }
+    p { margin: 7px 0; }
+    code, pre { font-family: var(--code); font-size: 12px; }
+    code { overflow-wrap: anywhere; }
+    pre {
+      margin: 8px 0;
+      padding: 11px 13px;
+      background: var(--wash);
+      border-left: 2px solid var(--green);
+      line-height: 1.55;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      tab-size: 4;
+    }
+    pre code { font-size: inherit; }
+    .keyword { color: #005c82; font-weight: 700; }
+    .string { color: #915315; }
+    .function { color: var(--green); }
+    .note { color: var(--muted); font-size: 12px; }
+    .emphasis { color: var(--red); font-weight: 700; }
+    table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 12px; }
+    th { text-align: left; color: var(--muted); font-size: 10px; font-weight: 700; }
+    th, td { border-bottom: 1px solid var(--line); padding: 7px 5px; vertical-align: top; overflow-wrap: anywhere; }
+    th:first-child, td:first-child { padding-left: 0; width: 31%; }
+    th:nth-child(2) { width: 32%; }
+    td:last-child { color: var(--green); }
+    td code { font-size: 11px; }
+    tbody tr:last-child td { border-bottom: 0; }
+    .shape-table th:first-child, .shape-table td:first-child { width: 36%; }
+    .shape-table th:nth-child(2) { width: 43%; }
+    .shape-table td:last-child { white-space: nowrap; }
+    figure { margin: 11px 0 0; }
+    .plot { display: block; width: 100%; height: 126px; }
+    figcaption { font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .facts { margin: 0; }
+    .fact { padding: 7px 0; border-bottom: 1px solid var(--line); }
+    .fact:last-child { border-bottom: 0; }
+    dt { font-weight: 700; font-size: 12px; }
+    dd { margin: 2px 0 0; font-size: 12px; }
+    .warning { margin-top: 10px; padding: 8px 10px; border-left: 3px solid #ae7600; background: var(--warning); font-size: 12px; }
+    .warning strong { color: #694700; }
+    .checkpoint { margin: 14px 0 0; padding-bottom: 12px; border-bottom: 2px solid var(--ink); font-size: 12px; }
+    .checkpoint strong { color: var(--green); }
+    footer { flex-wrap: wrap; padding-top: 11px; align-items: baseline; font-size: 11px; color: var(--muted); }
+    nav { display: flex; flex-wrap: wrap; gap: 6px 14px; }
+    a { color: var(--green); text-underline-offset: 3px; }
+    a:hover { color: var(--red); }
+    a:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
+    @media (max-width: 720px) {
+      main { margin: 0; padding: 22px 20px 20px; }
+      .reference-grid { grid-template-columns: 1fr; }
+      .masthead, .title-row { flex-wrap: wrap; gap: 6px; }
+      h1 { font-size: 31px; }
+      .title-row { margin-top: 14px; }
+      .runtime { flex-basis: 100%; }
+      th, td { padding: 8px 4px; }
+      .plot { height: 145px; }
+      footer { gap: 9px; }
+    }
+    @page { size: letter; margin: 0.4in; }
+    @media print {
+      body { background: white; font-size: 9pt; line-height: 1.35; }
+      main { width: 100%; max-width: none; margin: 0; padding: 10px 0 0; border-top-width: 3px; }
+      header { padding-bottom: 10px; }
+      .masthead { font-size: 8pt; }
+      .title-row { margin-top: 6px; }
+      h1 { font-size: 26pt; }
+      .runtime { font-size: 8pt; }
+      .intro { margin-top: 5px; }
+      .setup { font-size: 8pt; margin-top: 4px; }
+      .reference-grid { grid-template-columns: 1fr 1fr; column-gap: 22px; }
+      section { padding: 11px 0 9px; break-inside: avoid; }
+      h2 { font-size: 11pt; margin-bottom: 5px; }
+      .number { font-size: 8pt; }
+      pre { padding: 7px 8px; margin: 5px 0; font-size: 8pt; line-height: 1.35; }
+      code, td code { font-size: 7.7pt; }
+      table { font-size: 8pt; }
+      th { font-size: 7pt; }
+      th, td { padding: 4px 3px; }
+      .note, dt, dd, .warning { font-size: 8pt; }
+      .fact { padding: 5px 0; }
+      .plot { height: 96px; }
+      figcaption, footer { font-size: 7.5pt; }
+      figure { margin-top: 6px; }
+      .warning { padding: 6px 8px; margin-top: 7px; }
+      .checkpoint { margin-top: 9px; padding-bottom: 8px; font-size: 8pt; }
+      footer { padding-top: 7px; }
+      a { text-decoration: none; }
+      * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="masthead">
+        <span>UW / COMPUTATIONAL NEUROSCIENCE</span>
+        <span class="edition">PROGRAMMING PREPARATION / 01</span>
+      </div>
+      <div class="title-row">
+        <h1>Python <span>Field Notes</span></h1>
+        <span class="runtime">Python 3 + NumPy + Matplotlib</span>
+      </div>
+      <p class="intro"><strong>The job:</strong> represent neural data, calculate with arrays, and visualize signals. NumPy does the math; Matplotlib makes the plots.</p>
+      <p class="setup">Stay in VS Code with the right Python interpreter selected. Anaconda and Spyder are optional. Console = quick experiments; script = repeatable work.</p>
+    </header>
+
+    <div class="reference-grid">
+      <section aria-labelledby="starter-title">
+        <h2 id="starter-title"><span class="number">01</span> Your starting point</h2>
+        <pre><code><span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
+
+values = np.<span class="function">array</span>([1, -1, 2, -2, 3])
+doubled = values * 2
+average = values.<span class="function">mean</span>()</code></pre>
+        <p class="note">Result: <code>[2, -2, 4, -4, 6]</code>; mean: <code>0.6</code>.</p>
+        <p><span class="emphasis">Array, not list.</span> <code>[1, 2] * 2</code> repeats a list. <code>np.array([1, 2]) * 2</code> doubles its values.</p>
+      </section>
+
+      <section aria-labelledby="translation-title">
+        <h2 id="translation-title"><span class="number">02</span> MATLAB to NumPy</h2>
+        <table>
+          <thead><tr><th scope="col">Operation</th><th scope="col">MATLAB</th><th scope="col">NumPy</th></tr></thead>
+          <tbody>
+            <tr><td>First element</td><td><code>values(1)</code></td><td><code>values[0]</code></td></tr>
+            <tr><td>Columns 2 &amp; 3</td><td><code>matrix(:,2:3)</code></td><td><code>matrix[:,1:3]</code></td></tr>
+            <tr><td>Element-wise</td><td><code>left .* right</code></td><td><code>left * right</code></td></tr>
+            <tr><td>Matrix product</td><td><code>left * right</code></td><td><code>left @ right</code></td></tr>
+            <tr><td>Square each value</td><td><code>values .^ 2</code></td><td><code>values ** 2</code></td></tr>
+            <tr><td>2-by-3 zeros</td><td><code>zeros(2,3)</code></td><td><code>np.zeros((2,3))</code></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section aria-labelledby="shape-title">
+        <h2 id="shape-title"><span class="number">03</span> Inspect the shape first</h2>
+        <table class="shape-table">
+          <thead><tr><th scope="col">Array</th><th scope="col">Expression</th><th scope="col">Shape</th></tr></thead>
+          <tbody>
+            <tr><td>1D vector</td><td><code>np.array([1,2,3])</code></td><td><code>(3,)</code></td></tr>
+            <tr><td>Column</td><td><code>vector.reshape(3,1)</code></td><td><code>(3,1)</code></td></tr>
+            <tr><td>Row</td><td><code>vector.reshape(1,3)</code></td><td><code>(1,3)</code></td></tr>
+          </tbody>
+        </table>
+        <p class="note">Here, <code>vector = np.array([1,2,3])</code>. <strong><code>vector.T</code> is still 1D</strong>, not a column. Use <code>reshape</code>.</p>
+        <pre><code>matrix[:, 1:3]
+matrix[:, 0:5:2]
+values[values &lt; 0] = 0</code></pre>
+        <p class="note">Select columns 2 &amp; 3; select columns 1, 3 &amp; 5; replace negative entries. Slices use <code>start:stop:step</code>; <strong>stop is excluded.</strong></p>
+      </section>
+
+      <section aria-labelledby="signal-title">
+        <h2 id="signal-title"><span class="number">04</span> From numbers to a signal</h2>
+        <pre><code>samples = np.<span class="function">linspace</span>(0, 5, 101)
+signal = np.<span class="function">sin</span>(samples ** 2)
+plt.<span class="function">plot</span>(samples, signal)
+plt.<span class="function">xlabel</span>(<span class="string">"x"</span>)
+plt.<span class="function">ylabel</span>(<span class="string">"sin(x squared)"</span>)
+plt.<span class="function">show</span>()</code></pre>
+        <figure>
+          <canvas id="signal-plot" class="plot" role="img" aria-label="Plot of sin(x squared) from x equals zero to five. It starts at zero, peaks near 1.25, and oscillates increasingly quickly.">sin(x squared): starts at zero, peaks near x = 1.25, then oscillates increasingly quickly.</canvas>
+          <figcaption>Quiz connection: 101 points, both endpoints included. This is sin(x squared), not sin(x) squared.</figcaption>
+        </figure>
+      </section>
+
+      <section aria-labelledby="rules-title">
+        <h2 id="rules-title"><span class="number">05</span> Three rules worth remembering</h2>
+        <dl class="facts">
+          <div class="fact"><dt>Index from zero. Call with parentheses.</dt><dd><code>values[0]</code> selects; <code>np.mean(values)</code> calls a function. Python uses indentation to group code.</dd></div>
+          <div class="fact"><dt>Division already works in Python 3.</dt><dd><code>3 / 5 = 0.6</code>; <code>3 // 5 = 0</code>; <code>-3 // 5 = -1</code>. <code>//</code> floors toward negative infinity. No <code>__future__</code> import needed.</dd></div>
+          <div class="fact"><dt>Match dimensions before multiplying.</dt><dd>For 2D arrays: <code>(rows, inner) @ (inner, cols)</code> gives <code>(rows, cols)</code>. Unexpected result? Check <code>.shape</code> and broadcasting.</dd></div>
+        </dl>
+      </section>
+
+      <section aria-labelledby="data-title">
+        <h2 id="data-title"><span class="number">06</span> Load course data safely</h2>
+        <pre><code><span class="keyword">import</span> pickle
+
+<span class="keyword">with</span> <span class="function">open</span>(<span class="string">"course_data.pkl"</span>, <span class="string">"rb"</span>) <span class="keyword">as</span> data_file:
+    data = pickle.<span class="function">load</span>(data_file)</code></pre>
+        <p class="note"><code>rb</code> = read binary. <code>with</code> closes the file automatically. <code>pickle</code> is included in Python.</p>
+        <aside class="warning"><strong>Trusted files only.</strong> A pickle can execute code while loading. Do not open unknown downloads with <code>pickle.load</code>.</aside>
+        <p class="note">Legacy Python 2 data with decoding errors may need <code>pickle.load(data_file, encoding="latin1")</code>. Use only when required for compatibility.</p>
+      </section>
+    </div>
+
+    <p class="checkpoint"><strong>Before moving on:</strong> create an array, explain its shape, slice its columns, choose <code>*</code> or <code>@</code>, and plot a signal without copying.</p>
+    <footer>
+      <nav aria-label="Study references">
+        <a href="python_information_and_tutorials.md">Full notes</a>
+        <a href="../quizzes/matlab_programming_quiz.md">MATLAB quiz</a>
+        <a href="https://numpy.org/doc/stable/user/numpy-for-matlab-users.html">NumPy reference</a>
+      </nav>
+      <span>Study reference / 13 Sep 2026 / Python 3 corrections applied</span>
+    </footer>
+  </main>
+  <script>
+    const canvas = document.getElementById("signal-plot");
+    const context = canvas.getContext("2d");
+
+    function drawSignal() {
+      if (!context) return;
+      const bounds = canvas.getBoundingClientRect();
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = Math.round(bounds.width * ratio);
+      canvas.height = Math.round(bounds.height * ratio);
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      const width = bounds.width;
+      const height = bounds.height;
+      const left = 26;
+      const right = width - 12;
+      const top = 10;
+      const bottom = height - 22;
+      const mapX = value => left + value / 5 * (right - left);
+      const mapY = value => top + (1 - value) / 2 * (bottom - top);
+
+      context.fillStyle = "#ffffff";
+      context.fillRect(0, 0, width, height);
+      context.lineWidth = 1;
+      context.font = '10px "Trebuchet MS", sans-serif';
+      context.textAlign = "right";
+      context.textBaseline = "middle";
+
+      for (const level of [-1, 0, 1]) {
+        context.strokeStyle = level === 0 ? "#b1bcbc" : "#e2e8e6";
+        context.beginPath();
+        context.moveTo(left, mapY(level));
+        context.lineTo(right, mapY(level));
+        context.stroke();
+        context.fillStyle = "#536061";
+        context.fillText(String(level), left - 7, mapY(level));
+      }
+
+      context.textAlign = "center";
+      for (let tick = 0; tick <= 5; tick += 1) {
+        context.fillText(String(tick), mapX(tick), bottom + 13);
+      }
+
+      context.strokeStyle = "#006858";
+      context.lineWidth = 1.8;
+      context.beginPath();
+      for (let index = 0; index <= 100; index += 1) {
+        const sample = index / 20;
+        const horizontal = mapX(sample);
+        const vertical = mapY(Math.sin(sample ** 2));
+        if (index === 0) context.moveTo(horizontal, vertical);
+        else context.lineTo(horizontal, vertical);
+      }
+      context.stroke();
+      canvas.dataset.rendered = "true";
+    }
+
+    drawSignal();
+    new ResizeObserver(drawSignal).observe(canvas);
+    window.addEventListener("beforeprint", drawSignal);
+    window.addEventListener("afterprint", drawSignal);
+  </script>
+</body>
+</html>

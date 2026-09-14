@@ -115,6 +115,7 @@ uw-computational-neuroscience/
 
 - [MATLAB programming quiz](quizzes/matlab_programming_quiz.md): all 14 questions shared as screenshots, a quick answer key, and explanations of correct and incorrect options.
 - [Python Information and Tutorials](notes/python_information_and_tutorials.md): practical Python 3 summary, NumPy and Matplotlib examples, MATLAB syntax differences, and safe pickle handling.
+- [Python one-page HTML reference](notes/python_one_pager.html): an offline reference covering arrays, shapes, plotting, MATLAB translations, and pickle safety. Open directly in a browser; formatted to print on one US Letter page.
 
 ### Study Log
 
@@ -122,6 +123,7 @@ uw-computational-neuroscience/
 |---|---|---|
 | 2026-09-13 | MATLAB programming preparation | Documented 14 quiz questions with answers and explanations. Submission and score are not confirmed. |
 | 2026-09-13 | Python Information and Tutorials | Documented the shared reading as practical notes with Python 3 corrections and examples. No optional Python quiz questions have been shared. |
+| 2026-09-13 | Python HTML one-pager | Created a self-contained quick reference with a rendered signal plot. Checked desktop and mobile layout and verified a one-page US Letter PDF export. |
 
 These records establish what was shared and documented, not independent mastery or completion of a neuroscience module. Topic checkboxes remain unchanged until demonstrated.
 
