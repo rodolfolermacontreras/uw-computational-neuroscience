@@ -115,8 +115,17 @@ uw-computational-neuroscience/
 
 - [MATLAB programming quiz](quizzes/matlab_programming_quiz.md): all 14 questions shared as screenshots, a quick answer key, and explanations of correct and incorrect options.
 - [Python programming quiz](quizzes/python_programming_quiz.md): all 14 practice questions shared on September 14, with answers, option explanations, and worked examples for indexing, masks, and matrix transformations.
+- [Executed Python quiz notebook](quizzes/python_programming_quiz.ipynb): runnable examples for all 14 questions, saved outputs, assertions, a sine plot, and safely captured expected errors.
 - [Python Information and Tutorials](notes/python_information_and_tutorials.md): practical Python 3 summary, NumPy and Matplotlib examples, MATLAB syntax differences, and safe pickle handling.
 - [Python one-page HTML reference](notes/python_one_pager.html): an offline reference covering arrays, shapes, plotting, MATLAB translations, and pickle safety. Open directly in a browser; formatted to print on one US Letter page.
+
+### Running the Notebook
+
+Open the notebook in VS Code or Jupyter and select a Python kernel with `numpy`, `matplotlib`, and `ipykernel`. Restart the kernel and run all cells to reproduce the results. Cell 2 prints the package versions; Cells 3 through 16 cover Questions 1 through 14; Cell 18 verifies completion.
+
+The saved run used Python 3.11.1, NumPy 2.4.6, and Matplotlib 3.11.2. Random examples are seeded, and the trusted pickle example creates and removes its own temporary data. Question 14 leaves `pause_in_debugger = False` so an unattended run does not stop at a breakpoint. Enable it only for manual debugger practice.
+
+Question 4 deliberately tests the invalid call `np.ones(5, 5)`. An editor type checker may flag it; the example catches its expected `TypeError` and continues. These intentional error demonstrations are not uncaught execution failures.
 
 ### Study Log
 
@@ -125,7 +134,8 @@ uw-computational-neuroscience/
 | 2026-09-13 | MATLAB programming preparation | Documented 14 quiz questions with answers and explanations. Submission and score are not confirmed. |
 | 2026-09-13 | Python Information and Tutorials | Documented the shared reading as practical notes with Python 3 corrections and examples. Python quiz questions had not yet been shared at that point. |
 | 2026-09-13 | Python HTML one-pager | Created a self-contained quick reference with a rendered signal plot. Checked desktop and mobile layout and verified a one-page US Letter PDF export. |
-| 2026-09-14 | Python programming practice quiz | Documented all 14 questions with answers and explanations. Checked answer-key consistency and arithmetic; NumPy runtime execution was unavailable. Submission and score are not confirmed. |
+| 2026-09-14 | Python programming practice quiz | Documented all 14 questions with answers and explanations. Initial checks covered answer-key consistency and arithmetic; runtime verification was completed in the notebook below. Submission and score are not confirmed. |
+| 2026-09-14 | Executed Python quiz notebook | Ran all 16 code cells, covering 14 question examples plus setup and final verification. Assertions passed; outputs and plot are saved. Expected exceptions were caught, and the interactive breakpoint was intentionally skipped. |
 
 These records establish what was shared and documented, not independent mastery or completion of a neuroscience module. Topic checkboxes remain unchanged until demonstrated.
 

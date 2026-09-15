@@ -5,6 +5,8 @@
 **Source:** The 14 Python Programming practice questions shared as screenshots in this session.
 **Status:** Study answer key, not an official course answer key. Submission, score, and independent mastery have not been confirmed.
 
+**Executed companion:** [Python quiz notebook](python_programming_quiz.ipynb), with runnable examples, saved outputs, assertions, and the Question 10 plot. All 14 examples completed their checks on September 14, 2026; the Question 14 breakpoint is disabled during unattended execution.
+
 Options are numbered from top to bottom in the screenshots. Plot and matrix choices are described in text; screenshots are not embedded. Some incorrect choices are paraphrased for readability. Examples assume Python 3 and `import numpy as np` unless the question concerns that import itself.
 
 ## Quick Answer Key
