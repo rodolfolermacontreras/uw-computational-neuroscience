@@ -114,6 +114,7 @@ uw-computational-neuroscience/
 ## Study Materials
 
 - [MATLAB programming quiz](quizzes/matlab_programming_quiz.md): all 14 questions shared as screenshots, a quick answer key, and explanations of correct and incorrect options.
+- [Python programming quiz](quizzes/python_programming_quiz.md): all 14 practice questions shared on September 14, with answers, option explanations, and worked examples for indexing, masks, and matrix transformations.
 - [Python Information and Tutorials](notes/python_information_and_tutorials.md): practical Python 3 summary, NumPy and Matplotlib examples, MATLAB syntax differences, and safe pickle handling.
 - [Python one-page HTML reference](notes/python_one_pager.html): an offline reference covering arrays, shapes, plotting, MATLAB translations, and pickle safety. Open directly in a browser; formatted to print on one US Letter page.
 
@@ -122,8 +123,9 @@ uw-computational-neuroscience/
 | Date | Material | Recorded work |
 |---|---|---|
 | 2026-09-13 | MATLAB programming preparation | Documented 14 quiz questions with answers and explanations. Submission and score are not confirmed. |
-| 2026-09-13 | Python Information and Tutorials | Documented the shared reading as practical notes with Python 3 corrections and examples. No optional Python quiz questions have been shared. |
+| 2026-09-13 | Python Information and Tutorials | Documented the shared reading as practical notes with Python 3 corrections and examples. Python quiz questions had not yet been shared at that point. |
 | 2026-09-13 | Python HTML one-pager | Created a self-contained quick reference with a rendered signal plot. Checked desktop and mobile layout and verified a one-page US Letter PDF export. |
+| 2026-09-14 | Python programming practice quiz | Documented all 14 questions with answers and explanations. Checked answer-key consistency and arithmetic; NumPy runtime execution was unavailable. Submission and score are not confirmed. |
 
 These records establish what was shared and documented, not independent mastery or completion of a neuroscience module. Topic checkboxes remain unchanged until demonstrated.
 

@@ -175,7 +175,7 @@ These items remain unchecked until demonstrated; reading this summary is not a m
 - [ ] Load a trusted pickle file and explain why untrusted pickles are unsafe.
 - [ ] Write a short function and use a loop without relying on a guided exercise.
 
-The reading also mentions an optional Python programming quiz. No questions or results from that quiz have been shared yet. The quiz documented in this session is the MATLAB quiz, not the Python quiz.
+The reading also mentions an optional Python programming quiz. Its 14 questions were shared on September 14, 2026 and are now saved with [answers and explanations](../quizzes/python_programming_quiz.md). Submission and score are not confirmed. The earlier [MATLAB quiz](../quizzes/matlab_programming_quiz.md) is documented separately.
 
 ## Reference Links
 
