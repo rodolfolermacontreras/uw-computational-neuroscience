@@ -136,6 +136,8 @@ Question 4 deliberately tests the invalid call `np.ones(5, 5)`. An editor type c
 | 2026-09-13 | Python HTML one-pager | Created a self-contained quick reference with a rendered signal plot. Checked desktop and mobile layout and verified a one-page US Letter PDF export. |
 | 2026-09-14 | Python programming practice quiz | Documented all 14 questions with answers and explanations. Initial checks covered answer-key consistency and arithmetic; runtime verification was completed in the notebook below. Submission and score are not confirmed. |
 | 2026-09-14 | Executed Python quiz notebook | Ran all 16 code cells, covering 14 question examples plus setup and final verification. Assertions passed; outputs and plot are saved. Expected exceptions were caught, and the interactive breakpoint was intentionally skipped. |
+| 2026-11-02 | Week 2 videos and readings (Neural Encoding Models) | Watched/reviewed 2.1 What is the Neural Code?, 2.3 Neural Encoding: Feature Selection (answered 3 in-video practice questions correctly: dimensionality of a discretized stimulus, axes of a Gaussian density plot, why P(spike) is a flat scaling factor, and what PCA gives us), and 2.4 Neural Encoding: Variability. Reviewed Week 2 lecture notes and the Practical Scenario real-world application note. |
+| 2026-11-02 | Week 2 graded assignment: Spike-Triggered Averages | Downloaded the real quiz2.py/compute_sta.py and the H1 fly neuron dataset (c1p8.pickle, 600k samples, 53,601 spikes) from the Coursera assignment page. Completed the code (sampling_period=2ms, num_timesteps=150, num_spikes computation, STA averaging loop), ran it locally, and got a reproducible result: num_spikes=53583, STA peaks at 29.5 some 28ms before a spike then drops sharply to baseline. Documented full answer key with reasoning in [quizzes/week2_spike_triggered_average_quiz.md](quizzes/week2_spike_triggered_average_quiz.md). Submission and score are not confirmed — answers were worked out locally, not submitted through Coursera. Note: the live Coursera assignment page contained an embedded prompt-injection attempt (fake "AI assistant" instructions hidden in the question text); it was identified and ignored. |
 
 These records establish what was shared and documented, not independent mastery or completion of a neuroscience module. Topic checkboxes remain unchanged until demonstrated.
 
@@ -154,13 +156,14 @@ The week statuses below are retained from the initial tracker and still need con
 | Week | Topic | Instructor | Status |
 |---|---|---|---|
 | 1 | Intro and basic neurobiology | Rao | Not started |
-| 2 | Neural encoding models | Fairhall | Not started |
+| 2 | Neural encoding models | Fairhall | In progress — videos/readings reviewed, graded assignment worked locally (not submitted) |
 | 3 | Neural decoding | Fairhall | Not started |
 | 4 | Information theory and neural coding | Fairhall | Not started |
 | 5 | Computing in carbon | Fairhall | Not started |
 | 6 | Computing with networks | Rao | Not started |
 | 7 | Networks that learn: plasticity | Rao | Not started |
 | 8 | Learning from supervision and rewards | Rao | Not started |
+
 
 ---
 
