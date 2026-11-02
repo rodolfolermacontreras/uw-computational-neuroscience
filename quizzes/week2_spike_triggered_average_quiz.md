@@ -20,17 +20,23 @@ re-running.
 
 ## Quick Answer Key
 
-| Question | Answer | Basis |
-|---|---|---|
-| 1 | `y(t) = cos[x(t-θ)]` is **not** linear | Only option where the output is a nonlinear function of the input |
-| 2 | The stimuli preceding a spike, averaged over all stimuli that elicited a spike | Standard definition; matches lecture 2.3 |
-| 3 | `sampling_period = 2` (ms) | 1000 ms / 500 Hz = 2 ms |
-| 4 | `num_timesteps = 150` | 300 ms window / 2 ms per sample = 150 |
-| 5 | `num_spikes = 53583` | Computed from data (53,601 total − 18 within the first 300 ms) |
-| 6 | The plot that ramps up slowly, peaks sharply ~28 ms before the spike, then drops straight back to baseline (no sustained negative undershoot) | Matches our actual computed STA, see `sta_plot.png` |
-| 7 | Differentiation | STA shape is a rise-then-sharp-fall transient, not a flat average or monotonic decay |
-| 8 | A positive value followed by a negative value | Mirrors the STA's own shape: large positive buildup followed by a sharp drop |
-| 9 | Principal component analysis / covariance analysis | Explicitly the method taught in lecture 2.3 for multi-feature neurons |
+**Submitted score: 85% (passing threshold 80%).** Coursera's per-question feedback
+confirmed Q1–6 and Q9 correct; **Q7 and Q8 were marked wrong on the first submission**
+(both "Differentiation" / "positive then negative"). Corrected below with the reasoning
+that was missing the first time, and verified against the actual STA data (it is **never
+meaningfully negative** — min −0.36 vs. peak +29.5, i.e., noise floor, not a real trough).
+
+| Question | Answer | Basis | Result |
+|---|---|---|---|
+| 1 | `y(t) = cos[x(t-θ)]` is **not** linear | Only option where the output is a nonlinear function of the input | ✅ 1/1 |
+| 2 | The stimuli preceding a spike, averaged over all stimuli that elicited a spike | Standard definition; matches lecture 2.3 | ✅ 1/1 |
+| 3 | `sampling_period = 2` (ms) | 1000 ms / 500 Hz = 2 ms | ✅ 2/2 |
+| 4 | `num_timesteps = 150` | 300 ms window / 2 ms per sample = 150 | ✅ 2/2 |
+| 5 | `num_spikes = 53583` | Computed from data (53,601 total − 18 within the first 300 ms) | ✅ 5/5 |
+| 6 | The plot that ramps up slowly, peaks sharply ~28 ms before the spike, then drops straight back to baseline (no sustained negative undershoot) | Matches our actual computed STA, see `sta_plot.png` | ✅ 5/5 |
+| 7 | ~~Differentiation~~ → **Leaky integration** | The STA is single-signed (always ≥ ~0); a true derivative/differentiator needs a biphasic (positive-then-negative) kernel, which is absent here | ❌→fixed (was 0/2) |
+| 8 | ~~A positive value followed by a negative value~~ → **A constant positive value** | The kernel is uniformly positive, so a sustained positive stimulus maximizes overlap with it; an alternating stimulus would partly cancel against a filter with no negative lobe | ❌→fixed (was 0/1) |
+| 9 | Principal component analysis / covariance analysis | Explicitly the method taught in lecture 2.3 for multi-feature neurons | ✅ 1/1 |
 
 ## Question 1: Which system is not a linear filter?
 
@@ -115,20 +121,30 @@ and not the flat, rectangular/step, or narrow-spike options.
 
 Options were: no response, running average/sum, differentiation, leaky integration.
 
-A running average or leaky integration would produce a smooth, monotonically decaying (or
-flat) kernel — no sharp sign change. What we actually see is a transient: the stimulus
-builds up over tens of milliseconds and then changes sharply right as the spike occurs. That
-rapid-change sensitivity is the signature of **differentiation** — the neuron is more
-responsive to how fast the stimulus is changing than to its absolute level, consistent with
-H1 being a motion- (velocity-) sensitive neuron.
+**First submission answered "Differentiation" — marked wrong (0/2).** On reflection, a true
+differentiator requires a **biphasic** kernel: a positive lobe immediately followed by a
+comparably-sized **negative** lobe (sign reversal), because the derivative of a signal that
+goes up then down is positive then negative. Checking the actual computed STA values: the
+minimum across the whole 300 ms window is **−0.36**, compared to a peak of **+29.5** — that
+"negative" tail is noise floor, not a real trough. The STA is **single-signed**: it is
+indistinguishable from zero over most of the window, rises to one broad positive peak around
+28 ms before the spike, and falls back toward zero — but never goes meaningfully negative.
+That one-sided, broad, rise-and-decay shape (no sign reversal) is the signature of **leaky
+integration**, not differentiation. Running average/sum would be flatter with less sharp
+structure, and "no response" is clearly wrong given the large, consistent peak.
+
+**Corrected answer: Leaky integration.**
 
 ## Question 8: Preferred stimulus pattern
 
-Given the STA's own shape — a sustained positive value building up, followed by a sharp
-drop — the neuron should respond most strongly to **a positive value followed by a negative
-value**, i.e., a stimulus that mirrors the shape of its own STA. This is exactly the
-"ramps up, then goes down" example used in lecture 2.3 to illustrate a feature that
-triggers firing.
+**First submission answered "a positive value followed by a negative value" — marked wrong
+(0/1).** That answer assumed the differentiator interpretation from Q7, which was incorrect.
+Since the kernel (STA) is uniformly non-negative across the whole window — there is no
+negative lobe to multiply against a negative stimulus segment — the response (a convolution
+of the stimulus with this all-positive kernel) is maximized by a stimulus that stays positive
+throughout the entire window, not one that flips sign.
+
+**Corrected answer: A constant positive value.**
 
 ## Question 9: Finding two feature modes
 
